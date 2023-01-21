@@ -1,0 +1,9 @@
+if self.render_mode == 'human':
+            low, high = utils.maybe_parse_reset_bounds(options, -0.6, -0.4)
+            self.state = np.array([self.np_random.uniform(low=low, high=high), 0])
+
+        else:
+            # changing to all states, actions randomly sampled
+            x_low, x_high = -1.2, 0.5
+            v_low, v_high = -0.07, 0.07
+            self.state = np.array([self.np_random.uniform(low=x_low, high=x_high), self.np_random.uniform(low=v_low, high=v_high)])
