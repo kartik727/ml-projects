@@ -1,0 +1,8 @@
+flask
+markdown
+newspaper3k
+requests
+bs4
+Frozen-Flask
+functions-framework==3.*
+google-cloud-storage

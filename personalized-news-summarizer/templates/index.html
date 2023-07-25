@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>News Website</title>
+    <link rel="shortcut icon" href="{{favicon_url}}">
+    <link rel="stylesheet" href="{{stylesheet_url}}">
+</head>
+<body>
+    
+    <div class="container">
+        <h1>News for {{ curr_date }}</h1>
+    </div>
+
+    {% for article_holder in article_holders %}
+
+        <div class="container">
+
+        <h2>{{ article_holder.title }}</h2>
+
+        {% for article in article_holder.articles %}
+            <div class="article-box">
+
+                <h3>{{article.title}}</h3>
+
+                <div class="article-content">
+                    <div class="thumbnail">
+                        <img alt="Image Unavailable" src="{{article.img_url}}" width="200"/>
+                    </div>
+                    <div class="summary-details">
+                        <div class="summary">
+                            <p>{{article.summary}}</p>
+                            <p>{{article.source}} | {{article.time_str}} | <a href="{{article.url}}" target="_blank">Read more</a></p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        {% endfor %}
+
+        </div>
+
+    {% endfor %}
+</body>
+</html>
