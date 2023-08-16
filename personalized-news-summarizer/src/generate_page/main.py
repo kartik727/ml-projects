@@ -11,7 +11,13 @@ def upload_to_bucket(bucket_name, source_files)->str:
     responses = []
     for source_file in source_files:
         blob = bucket.blob(source_file)
-        blob.upload_from_filename(source_file)
+        if source_file.endswith('.html'):
+            blob.upload_from_filename(source_file, content_type='text/html; charset=utf-8')
+        elif source_file.endswith('.css'):
+            blob.upload_from_filename(source_file, content_type='text/css; charset=utf-8')
+        else:
+            blob.upload_from_filename(source_file)
+
         responses.append(f'Uploaded {source_file} to bucket {bucket_name} as {blob.name}')
     return '\n'.join(responses)
 
@@ -23,8 +29,6 @@ def generate_site(cloud_event):
 
     # write args for Flask app
     site_args = {
-        'num_articles' : request_json.get('num_articles', 2),
-        'categories' : request_json.get('categories', 'General'),
         'bucket_name' : request_json['bucket_name']
     }
     with open('site_args.json', 'w') as f:
